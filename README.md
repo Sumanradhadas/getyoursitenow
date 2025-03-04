@@ -82,7 +82,7 @@ npm run build  # Optimized frontend build
 Want to contribute? Feel free to submit PRs or suggest improvements!
 
 ## 📩 Contact
-For any queries or suggestions, reach out at **your.email@example.com**
+For any queries or suggestions, reach out at ssaurav4work@gmail.com
 
 ---
 
