@@ -23,20 +23,46 @@ Swaddesh is a high-quality, Bihar-themed restaurant website designed to provide 
 
 ## 📂 Project Structure
 ```
-Swaddesh/
-│── public/           # Static assets (images, icons, etc.)
-│── src/
-│   ├── components/   # Reusable UI components
-│   ├── pages/        # Page-wise structure (Home, Menu, About, Contact)
-│   ├── assets/       # Fonts, icons, and custom styles
-│   ├── hooks/        # Custom React hooks (if any)
-│   ├── utils/        # Helper functions
-│   ├── styles/       # Global and module-based CSS
-│── backend/          # Express.js API for menu & orders
-│── .gitignore        # Git ignore file
-│── package.json      # Project dependencies & scripts
-│── README.md         # Project documentation
-```
+# SWAADDESH Website - Directory Structure
+
+E:\SWAADDESH-WEBSITE
+│── index.html
+│── about.html
+│── menu.html
+│── social-media.html
+│── media.html
+│── reviews.html
+│── contact.html
+│── README.md
+│── menu.css
+│── menu.js
+│── drinks-menu.pdf
+│── dine-menu.pdf
+│
+├── scripts
+│   ├── main.js
+│   ├── animations.js
+│
+├── images
+│   ├── (Contains various image files used in the website)
+│
+├── assets
+│   ├── logo.jpg
+│   ├── logopre.png
+│   ├── logo copy.jpg
+│   ├── restaurant images (multiple files)
+│   ├── brand logos (Swiggy, Zomato, Easy Diner, etc.)
+│   ├── icons & miscellaneous (Live music, dine-in, social media icons, etc.)
+│   │
+│   ├── fonts
+│   │   ├── README.TXT
+│   │   ├── SAMAN___.TTF
+│
+├── styles
+│   ├── style.css
+│   ├── responsive.css
+│   ├── social-media.css
+
 
 ## 🎨 UI/UX Enhancements
 
@@ -82,7 +108,7 @@ npm run build  # Optimized frontend build
 Want to contribute? Feel free to submit PRs or suggest improvements!
 
 ## 📩 Contact
-For any queries or suggestions, reach out at **your.email@example.com**
+For any queries or suggestions, reach out at ssaurav4work@gmail.com
 
 ---
 
