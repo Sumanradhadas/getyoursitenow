@@ -10,13 +10,14 @@
 </head>
 <body>
 
-<!-- Navigation Bar -->
 <header>
     <nav class="navbar">
         <div class="logo">
             <a href="index.html" class="logo-text">Swaaddesh</a>
             <p class="tagline">Bihar themed restaurant</p>
         </div>
+
+        <!-- Normal Navigation (Desktop) -->
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
@@ -24,9 +25,20 @@
             <li><a href="reviews.html">Reviews</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="social-media.html">Social Media</a></li>
-                </ul>
-        <a href="#" class="order-btn">Order Now</a>
+        </ul>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
     </nav>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+            <li><a href="about.html" onclick="toggleMenu()">About Us</a></li>
+            <li><a href="menu.html" onclick="toggleMenu()">Menu</a></li>
+            <li><a href="reviews.html" onclick="toggleMenu()">Reviews</a></li>
+            <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
+            <li><a href="social-media.html" onclick="toggleMenu()">Social Media</a></li>
+        </ul>
+    </div>
 </header>
 <!-- User-Generated Content - Tag Us Section at the Top -->
 <section class="ugc">
