@@ -8,22 +8,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script defer src="scripts/main.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Preload Images -->
+    <link rel="preload" as="image" href="assets/dine in.jpg">
+    <link rel="preload" as="image" href="assets/drinks.png">
+
     <style>
         /* Prevent unwanted iframe injection */
-        iframe:not(#pdfIframe) {
+        iframe:not(#pageIframe) {
             display: none !important;
         }
     </style>
 </head>
 <body>
-  <header>
+
+<header>
     <nav class="navbar">
         <div class="logo">
             <a href="index.html" class="logo-text">Swaaddesh</a>
             <p class="tagline">Bihar themed restaurant</p>
         </div>
-
-        <!-- Normal Navigation (Desktop) -->
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
@@ -42,119 +46,146 @@
             <li><a href="menu.html" onclick="toggleMenu()">Menu</a></li>
             <li><a href="reviews.html" onclick="toggleMenu()">Reviews</a></li>
             <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
-            <li><a href="social-mediat.html" onclick="toggleMenu()">Social Media</a></li>
+            <li><a href="social-media.html" onclick="toggleMenu()">Social Media</a></li>
         </ul>
     </div>
 </header>
 
- <!-- Header Section -->
- <header class="menu-header">
-  <h1>स्वादेश का मेनू</h1>
-  <p>बिहार के असली स्वाद का अनुभव करें।</p>
+<header class="menu-header">
+    <h1>स्वादेश का मेनू</h1>
+    <p>बिहार के असली स्वाद का अनुभव करें।</p>
 </header>
 
-<!-- Menu Section -->
 <section class="menu-section">
-  <div class="menu-card">
-      <img src="assets/dine in.jpg" alt="Dine-In Menu" loading="lazy">
-      <h2>भोजन मेनू</h2>
-      <p>हमारे पारंपरिक बिहारी व्यंजनों का आनंद लें।</p>
-      <button class="btn" data-pdf="dine-menu.pdf">मेनू देखें</button>
-  </div>
+    <div class="menu-card">
+        <img src="assets/dine in.jpg" alt="Dine-In Menu" loading="eager">
+        <h2>भोजन मेनू</h2>
+        <p>हमारे पारंपरिक बिहारी व्यंजनों का आनंद लें।</p>
+        <button class="btn" data-url="dine-in.html">मेनू देखें</button>
+    </div>
 
-  <div class="menu-card">
-      <img src="assets/drinks.png" alt="Drinks Menu" loading="lazy">
-      <h2>पेय पदार्थ</h2>
-      <p>अपने भोजन के साथ ताज़गी भरे पेय पदार्थों का आनंद लें।</p>
-      <button class="btn" data-pdf="drinks-menu.pdf">मेनू देखें</button>
-  </div>
+    <div class="menu-card">
+        <img src="assets/drinks.png" alt="Drinks Menu" loading="eager">
+        <h2>पेय पदार्थ</h2>
+        <p>अपने भोजन के साथ ताज़गी भरे पेय पदार्थों का आनंद लें।</p>
+        <button class="btn" data-url="drinks-in.html">मेनू देखें</button>
+    </div>
 </section>
 
-<!-- PDF Modal -->
-<div id="pdfModal" class="modal">
-  <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <iframe id="pdfIframe" frameborder="0"></iframe>
-  </div>
+<!-- Modal for displaying pages -->
+<div id="pageModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <iframe id="pageIframe" frameborder="0"></iframe>
+    </div>
 </div>
 
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        background: #fff;
+        width: 90%;
+        max-width: 800px;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 95%;
+            height: 90vh;
+        }
+    }
+</style>
+
 <script>
-  // Open PDF function
-  document.querySelectorAll(".btn").forEach(button => {
-      button.addEventListener("click", function () {
-          const pdfUrl = this.getAttribute("data-pdf");
-          const modal = document.getElementById("pdfModal");
-          const iframe = document.getElementById("pdfIframe");
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const pageUrl = this.getAttribute("data-url");
+                const modal = document.getElementById("pageModal");
+                const iframe = document.getElementById("pageIframe");
 
-          if (pdfUrl) {
-              iframe.src = pdfUrl;
-              modal.style.display = "flex";
-              document.body.style.overflow = "hidden"; // Disable background scroll
-          }
-      });
-  });
+                if (pageUrl) {
+                    iframe.src = pageUrl;
+                    modal.style.display = "flex";
+                    document.body.style.overflow = "hidden"; // Prevent background scrolling
+                }
+            });
+        });
 
-  // Close PDF function
-  document.querySelector(".close-btn").addEventListener("click", function () {
-      const modal = document.getElementById("pdfModal");
-      const iframe = document.getElementById("pdfIframe");
+        // Close function
+        document.querySelector(".close-btn").addEventListener("click", function () {
+            const modal = document.getElementById("pageModal");
+            const iframe = document.getElementById("pageIframe");
 
-      modal.style.display = "none";
-      iframe.removeAttribute("src");
-      document.body.style.overflow = "auto"; // Enable background scroll
-  });
+            modal.style.display = "none";
+            iframe.removeAttribute("src");
+            document.body.style.overflow = "auto"; // Enable background scrolling
+        });
 
-  // Close modal on clicking outside content
-  window.addEventListener("click", function (event) {
-      const modal = document.getElementById("pdfModal");
-      if (event.target === modal) {
-          modal.style.display = "none";
-          document.getElementById("pdfIframe").removeAttribute("src");
-          document.body.style.overflow = "auto";
-      }
-  });
+        // Close modal on clicking outside content
+        window.addEventListener("click", function (event) {
+            const modal = document.getElementById("pageModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+                document.getElementById("pageIframe").removeAttribute("src");
+                document.body.style.overflow = "auto";
+            }
+        });
+    });
 </script>
+
 <footer>
-  <div class="footer-container">
-    <div class="footer-section">
-      <h2>Swaaddesh</h2>
-      <p>Experience the authentic flavors of Bihar with a village ambiance.</p>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h2>Swaaddesh</h2>
+            <p>Experience the authentic flavors of Bihar with a village ambiance.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>📍 Patna, Bihar, India</p>
+            <p>📞 +91 98765 43210</p>
+            <p>✉ support@swaddesh.com</p>
+        </div>
     </div>
-    <div class="footer-section">
-      <h3 class="footer-heading">Quick Links</h3>
-      <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#menu">Menu</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-      </div>
+    <div class="footer-copyright">
+        &copy; 2025 Swaddesh. All Rights Reserved. DESIGNED BY RADHA BHAKT
     </div>
-    <div class="footer-section">
-      <h3 class="footer-heading">Contact Us</h3>
-      <div class="footer-contact">
-        <p>📍 Patna, Bihar, India</p>
-        <p>📞 +91 98765 43210</p>
-        <p>✉ support@swaddesh.com</p>
-      </div>
-    </div>
-    <div class="footer-section">
-      <h3 class="footer-heading">Subscribe to Our Newsletter</h3>
-      <form class="footer-form">
-        <input type="email" placeholder="Enter your email" required>
-        <button>Subscribe</button>
-      </form>
-    </div>
-  </div>
-  <div class="social-icons">
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-  </div>
-  <div class="footer-copyright">
-    &copy; 2025 Swaddesh. All Rights Reserved.  DESIGNED BY RADHA BHAKT
-  </div>
 </footer>
-<!-- FontAwesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </body>
 </html>
